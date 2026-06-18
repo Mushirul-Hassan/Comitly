@@ -1,7 +1,12 @@
 const fs = require("fs").promises;
 const path = require("path");
+const { isRepoInitialized } = require("../utils/checkRepo");
 
 async function addRepo(filePath) {
+  if (!(await isRepoInitialized())) {
+    console.log("Not a Commitly repository! Run 'comitly init' first.");
+    return;
+  }
   const repoPath = path.resolve(process.cwd(), ".Commitly");
   const stagingPath = path.join(repoPath, "staging");
 
