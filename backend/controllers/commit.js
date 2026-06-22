@@ -2,7 +2,6 @@ const fs = require("fs").promises;
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
-
 async function commitRepo(message) {
   const repoPath = path.resolve(process.cwd(), ".Commitly");
   const stagingPath = path.join(repoPath, "staging");
@@ -34,9 +33,9 @@ async function commitRepo(message) {
 
     console.log(`Commit ${commitID} created with message: ${message}`);
 
-    await fs.rm({recursive: true, force: true});
+    await fs.rm(stagingPath, { recursive: true, force: true });
 
-    await fs.mkdir(stagingPath, {recursive: true});
+    await fs.mkdir(stagingPath, { recursive: true });
     console.log("Srtaging area wiped clean!");
   } catch (err) {
     console.error("Error committing files : ", err);
