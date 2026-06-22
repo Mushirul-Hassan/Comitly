@@ -1,0 +1,29 @@
+push.js-
+- DDos Attack 
+- aws traffic
+- silent history
+
+DRY (copyRecursive) - utils/fileHelpers.js
+Domino Effect - Global Constants - .Commitly - config/constants.js
+
+zod - wrap config.json in zod 
+store - for holding  - repoPath, config.json, aws bucket, logger instance
+ui/ux (backend) - ora, chalk
+
+status.js
+
+API Gateway
+Docker file
+ci/cd - github actions
+
+Refactor the CLI: Make push.js talk to an Express API endpoint instead of directly to MongoDB.
+
+Containerize: Write a Dockerfile for your Express API.
+
+Automate: Write a GitHub Actions YAML file to deploy that Docker container automatically.
+
+
+.comitlyignore
+
+check latency and concurrency 
+(redis/kafka)
