@@ -1,29 +1,30 @@
-push.js-
+**push.js-
 - DDos Attack 
 - aws traffic
 - silent history
 
-DRY (copyRecursive) - utils/fileHelpers.js
-Domino Effect - Global Constants - .Commitly - config/constants.js
+ DONE --- **DRY (copyRecursive) - utils/fileHelpers.js 
+*Domino Effect - Global Constants - .Commitly - config/constants.js
 
 zod - wrap config.json in zod 
-store - for holding  - repoPath, config.json, aws bucket, logger instance
+*store - for holding  - repoPath, config.json, aws bucket, logger instance
 ui/ux (backend) - ora, chalk
 
-status.js
+*status.js
 
-API Gateway
-Docker file
+#API Gateway
+*Docker file
 ci/cd - github actions
+*server-client -> seperate cli client - so that it can be accessed from anywhere
+*Refactor the CLI: Make push.js talk to an Express API endpoint instead of directly to MongoDB.
 
-Refactor the CLI: Make push.js talk to an Express API endpoint instead of directly to MongoDB.
+#Containerize: Write a Dockerfile for your Express API.
 
-Containerize: Write a Dockerfile for your Express API.
+#Automate: Write a GitHub Actions YAML file to deploy that Docker container automatically.
 
-Automate: Write a GitHub Actions YAML file to deploy that Docker container automatically.
+* profile management (saas-type)
 
-
-.comitlyignore
+.comitlyignore - package
 
 check latency and concurrency 
 (redis/kafka)

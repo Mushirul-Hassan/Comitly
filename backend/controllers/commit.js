@@ -1,6 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
+const { copyRecursive } = require("../utils/fileHelpers");
 
 async function commitRepo(message) {
   const repoPath = path.resolve(process.cwd(), ".Commitly");
@@ -39,22 +40,6 @@ async function commitRepo(message) {
     console.log("Srtaging area wiped clean!");
   } catch (err) {
     console.error("Error committing files : ", err);
-  }
-}
-
-async function copyRecursive(src, dest) {
-  const entries = await fs.readdir(src, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-
-    if (entry.isDirectory()) {
-      await fs.mkdir(destPath, { recursive: true });
-      await copyRecursive(srcPath, destPath);
-    } else {
-      await fs.copyFile(srcPath, destPath);
-    }
   }
 }
 
