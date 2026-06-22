@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 
 async function isRepoInitialized() {
-  const repoPath = path.resolve(process.cwd(), ".Commitly");
+  const repoPath = path.resolve(process.cwd(), ".Comitly");
 
   try {
     await fs.access(repoPath);
