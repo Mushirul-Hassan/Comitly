@@ -4,6 +4,20 @@ const mongoose = require("mongoose");
 const Repository = require("../models/repoModel");
 const readline = require("readline");
 
+function prompt(query) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return new Promise((resolve) =>
+    rl.question(query, (ans) => {
+      rl.close();
+      resolve(ans);
+    }),
+  );
+}
+
 async function pullRepo() {
   const repoPath = path.resolve(process.cwd(), ".Commitly");
   const commitsPath = path.join(repoPath, "commits");
@@ -24,12 +38,6 @@ async function pullRepo() {
 
     console.log("Downloading files from the cloud...");
 
-    // if file present in remote repo is NEW, then make a new file and write it
-    // if the file is not new then read it
-    // if local  = cloud then do nothing
-    // if change then ask for overwrite or no
-    // if yes then overwrite
-
     for (const dbFile of repo.content) {
       const localFilePath = path.resolve(process.cwd(), dbFile.name);
 
@@ -46,13 +54,13 @@ async function pullRepo() {
         }
       } else {
         await fs.writeFile(localFilePath, dbFile.content, "utf-8");
-        continue
+        continue;
       }
 
-      console.log(
-        "Warning: Your local file is different from the cloud. Do you want to overwrite your local file? (Y/N)",
+      const answer = await prompt(
+        "Warning: Your local file  is different from the cloud. Do you want to overwrite your local file? (Y/N)",
       );
-      if (Y) {
+      if (answer.trim().toUpperCase() === "Y") {
         await fs.writeFile(localFilePath, dbFile.content, "utf-8");
 
         console.log(`Pulled: ${dbFile.name}`);
