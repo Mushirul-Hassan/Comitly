@@ -7,6 +7,7 @@ const copyFile = promisify(fs.copyFile);
 
 async function revertRepo(commitID) {
   const repoPath = path.resolve(process.cwd(), ".Commitly");
+  //  const stagingPath = path.join(repoPath, "staging");
   const commitsPath = path.join(repoPath, "commits");
 
   try {
@@ -17,6 +18,7 @@ async function revertRepo(commitID) {
     for (const file of files) {
       await copyFile(path.join(commitDir, file), path.join(parentDir, file));
     }
+    await copyRecursive(parentDir, commitDir);
 
     console.log(`Commit ${commitID} reverted successfully!`);
   } catch (err) {
