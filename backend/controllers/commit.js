@@ -37,7 +37,7 @@ async function commitRepo(message) {
     await fs.rm(stagingPath, { recursive: true, force: true });
 
     await fs.mkdir(stagingPath, { recursive: true });
-    console.log("Srtaging area wiped clean!");
+    console.log("Staging area wiped clean!");
   } catch (err) {
     console.error("Error committing files : ", err);
   }
